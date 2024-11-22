@@ -1,0 +1,185 @@
+/* Estilos base (sin cambios) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+
+/* Estilos para las tarjetas */
+.card {
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 1.25em;
+    color: #4CAF50;
+}
+
+/* Estilos para los botones e interruptores */
+button, .switch {
+    margin: 10px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Estilos específicos para la sección Sensores y Alarma */
+.card h2.sensors {
+    font-size: 1.2em;
+    color: #FF5722;
+}
+
+.sensor-button {
+    background-color: #30be47;
+    color: white;
+    padding: 10px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sensor-button:hover {
+    background-color: #458650;
+}
+
+.alarm-button {
+    background-color: #30be47;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.alarm-button:hover {
+    background-color: #458650;
+}
+
+/* Estilos para el estado y la pantalla LCD */
+.status div, .lcd-screen, #humidity-level {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f4f4f9;
+    border-radius: 5px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.lcd-screen {
+    font-family: monospace;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 90%;
+    max-width: 200px;
+    margin: 0 auto;
+    
+}
+
+#sensor-data {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 8px;
+    border: 1px solid #c8e6c9;
+    font-size: 1em;
+    color: #333;
+}
+
+#temperature-level, #humidity-level {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#temperature-level {
+    color: #ff5722; /* Resalta temperatura */
+}
+
+#humidity-level {
+    color: #2196f3; /* Resalta humedad */
+}
