@@ -36,10 +36,9 @@
 
             <section class="card status">
                 <h2>Estado de los Dispositivos</h2>
-                <div id="status-cam">Sensor de humedad: Inactvida</div>
+                <div id="status-cam">Sensor de humedad: <span id = "state-dht"></span></div>
                 <div id="status-sensor">Sensores de Movimiento: <span id="state-sensor"></span></div>
-                <div id="status-buzzer">Alarma: Inactiva</div>
-                <div id="status-door">Puerta: Cerrada</div>
+                <div id="status-door">Puerta: <span id="state-door"></span></div>
             </section>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
