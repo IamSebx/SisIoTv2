@@ -1,6 +1,6 @@
 // Credenciales de ejemplo
-const correctUsername = "aaa";
-const correctPassword = "aaa";
+const correctUsername = "admin";
+const correctPassword = "admin";
 
 // Obtener el formulario y el elemento de mensaje de error
 const loginForm = document.getElementById("login-form");
