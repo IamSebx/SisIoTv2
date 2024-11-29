@@ -18,11 +18,41 @@
             </section>
 
 
+            
             <section class="card">
-                <h2>Control de Leds</h2>
-                <button id="led1" onclick='toggleLED("on")' class="sensor-button">Encender Luz</button>
-                <button id="led2" onclick='toggleLED("off")' class="sensor-button">Apagar Luz</button>
+                <h2>Control Individual de LEDs</h2>
+                <div class="led-grid">
+                    <div class="led-controls">
+                        <h3>LED 1</h3>
+                        <button id="led1-on" onclick='toggleIndividualLED(1, "on")' class="control-button">Encender LED 1</button>
+                        <button id="led1-off" onclick='toggleIndividualLED(1, "off")' class="control-button">Apagar LED 1</button>
+                    </div>
+                    <div class="led-controls">
+                        <h3>LED 2</h3>
+                        <button id="led2-on" onclick='toggleIndividualLED(2, "on")' class="control-button">Encender LED 2</button>
+                        <button id="led2-off" onclick='toggleIndividualLED(2, "off")' class="control-button">Apagar LED 2</button>
+                    </div>
+                    <div class="led-controls">
+                        <h3>LED 3</h3>
+                        <button id="led3-on" onclick='toggleIndividualLED(3, "on")' class="control-button">Encender LED 3</button>
+                        <button id="led3-off" onclick='toggleIndividualLED(3, "off")' class="control-button">Apagar LED 3</button>
+                    </div>
+                    <div class="led-controls">
+                        <h3>LED 4</h3>
+                        <button id="led4-on" onclick='toggleIndividualLED(4, "on")' class="control-button">Encender LED 4</button>
+                        <button id="led4-off" onclick='toggleIndividualLED(4, "off")' class="control-button">Apagar LED 4</button>
+                    </div>
+                </div>
             </section>
+            
+            
+            
+            <section class="card">
+                <h2>Control del Buzzer</h2>
+                <button id="buzzer-on" onclick='toggleBuzzer("on")' class="sensor-button">Encender Buzzer</button>
+                <button id="buzzer-off" onclick='toggleBuzzer("off")' class="sensor-button">Apagar Buzzer</button>
+            </section>
+            
             
             <section class="card">
                 <h2>Control de Temperatura</h2>
@@ -32,8 +62,11 @@
                 </div>
             </section>
             
+            <section class="card">
+                <h2>Historial de Eventos</h2>
+                <ul id="event-log" class="event-log"></ul>
+            </section>
             
-
             <section class="card status">
                 <h2>Estado de los Dispositivos</h2>
                 <div id="status-cam">Sensor de humedad: <span id = "state-dht"></span></div>

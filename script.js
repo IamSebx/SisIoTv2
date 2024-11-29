@@ -130,3 +130,48 @@ setInterval(updateDoorState, 1000)
 
 // Llamar automáticamente la función al cargar la página
 document.addEventListener('DOMContentLoaded', fetchSensorData);
+
+
+
+
+
+
+
+
+
+
+function toggleBuzzer(action) {
+  const url = action === 'on' 
+      ? `${backendUrl}componente-estado/buzzer?state=true` 
+      : `${backendUrl}componente-estado/buzzer?state=false`;
+
+  axios.post(url)
+      .then(response => {
+          console.log(`Buzzer ${action === 'on' ? 'encendido' : 'apagado'}:`, response.data);
+      })
+      .catch(error => {
+          console.error(`Error al ${action === 'on' ? 'encender' : 'apagar'} el buzzer:`, error);
+      });
+}
+
+
+
+// Función para controlar LEDs y registrar eventos
+function toggleIndividualLED(ledNumber, action) {
+  const ledState = action === "on" ? "Encendido" : "Apagado";
+  
+  // Aquí iría el código para encender/apagar el LED físicamente
+  console.log(`LED ${ledNumber} ${ledState}`);
+  
+  // Registrar el evento en el historial
+  logEvent(`LED ${ledNumber} fue ${ledState}`);
+}
+
+// Función para registrar eventos en el historial
+function logEvent(message) {
+  const eventLog = document.getElementById("event-log");
+  const timestamp = new Date().toLocaleTimeString(); // Hora actual
+  const eventItem = document.createElement("li");
+  eventItem.textContent = `[${timestamp}] ${message}`;
+  eventLog.prepend(eventItem); // Agrega el evento al inicio de la lista
+}
