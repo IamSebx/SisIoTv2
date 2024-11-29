@@ -5,6 +5,8 @@ const stateDht = document.getElementById("state-dht");
 const stateDoor = document.getElementById("state-door")
 const backendUrl = 'https://sisecurity.onrender.com/'; // Reemplaza con tu URL del backend
 let statePir1; let statePir2;
+const ul = document.getElementById("event-log")
+let lastEvents = []; // Para almacenar la última lista de eventos
 
 function updateSensorState() {
   axios.get(`${backendUrl}componente-estado/pir`)
@@ -63,22 +65,6 @@ function updateRFIDState() {
 // Llama a la función cada 1 segundo
 setInterval(updateRFIDState, 1000);
 
-
-function toggleLED(action) {
-  let leds = [1,2,3,4]
-  leds.forEach(led => {
-    url = action === 'on' ? `${backendUrl}componente-estado/led${led.toString()}?state=true` : `${backendUrl}componente-estado/led${led.toString()}?state=false`;
-    // Usar Axios para enviar la solicitud al backend
-    axios.post(url)
-      .then(response => {
-        console.log(`LED ${action === 'on' ? 'Encendido' : 'Apagado'}:`, response.data);
-      })
-      .catch(error => {
-        console.error(`Error al ${action === 'on' ? 'encender' : 'apagar'} el LED:`, error);
-      });
-  })
-}
-
 // Función para obtener datos del sensor DHT11 desde el backend
 function fetchSensorData() {
   const temperatureElement = document.getElementById('temperature-value');
@@ -131,15 +117,6 @@ setInterval(updateDoorState, 1000)
 // Llamar automáticamente la función al cargar la página
 document.addEventListener('DOMContentLoaded', fetchSensorData);
 
-
-
-
-
-
-
-
-
-
 function toggleBuzzer(action) {
   const url = action === 'on' 
       ? `${backendUrl}componente-estado/buzzer?state=true` 
@@ -158,20 +135,34 @@ function toggleBuzzer(action) {
 
 // Función para controlar LEDs y registrar eventos
 function toggleIndividualLED(ledNumber, action) {
-  const ledState = action === "on" ? "Encendido" : "Apagado";
-  
-  // Aquí iría el código para encender/apagar el LED físicamente
-  console.log(`LED ${ledNumber} ${ledState}`);
-  
-  // Registrar el evento en el historial
-  logEvent(`LED ${ledNumber} fue ${ledState}`);
+  url = action === 'on' ? `${backendUrl}componente-estado/led${ledNumber}?state=true` : `${backendUrl}componente-estado/led${ledNumber}?state=false`;
+    // Usar Axios para enviar la solicitud al backend
+    axios.post(url)
+      .then(response => {
+        console.log(`LED ${action === 'on' ? 'Encendido' : 'Apagado'}:`, response.data);
+      })
+      .catch(error => {
+        console.error(`Error al ${action === 'on' ? 'encender' : 'apagar'} el LED:`, error);
+      });
 }
 
-// Función para registrar eventos en el historial
-function logEvent(message) {
-  const eventLog = document.getElementById("event-log");
-  const timestamp = new Date().toLocaleTimeString(); // Hora actual
-  const eventItem = document.createElement("li");
-  eventItem.textContent = `[${timestamp}] ${message}`;
-  eventLog.prepend(eventItem); // Agrega el evento al inicio de la lista
+// Función para obtener los eventos
+function listEvents(){
+  axios.get(`${backendUrl}evento/listar/`)
+  .then(response => {
+    const data = response.data;
+    // Compara si los eventos han cambiado
+    if (JSON.stringify(data) !== JSON.stringify(lastEvents)) {
+      ul.innerHTML = ''; // Vacía la lista actual
+      data.forEach(event => {
+        ul.innerHTML += `<li>${event.descripcion} ${event.fecha}</li>`;
+      });
+      lastEvents = data; // Actualiza la lista de eventos almacenada
+    }
+  })
+  .catch(error => {
+    console.error("Error al obtener los datos de los eventos", error);
+  })
 }
+
+setInterval(listEvents, 1000)
