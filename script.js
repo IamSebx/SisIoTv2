@@ -4,22 +4,32 @@ const stateRFID = document.getElementById("state-rfid");
 const stateDht = document.getElementById("state-dht");
 const stateDoor = document.getElementById("state-door")
 const backendUrl = 'https://sisecurity.onrender.com/'; // Reemplaza con tu URL del backend
+let statePir1; let statePir2;
 
 function updateSensorState() {
   axios.get(`${backendUrl}componente-estado/pir`)
     .then(response => {
-      const data = response.data;
-      if (data.state === true) {
-        stateSensor.textContent = 'Persona sospechosa detectada';
-      } else if (data.state === false) {
-        stateSensor.textContent = 'Apagado';
-      } else {
-        stateSensor.textContent = 'Estado desconocido';
-      }
+      statePir1 = response.data.state;
     })
     .catch(error => {
       console.error('Error al obtener el estado:', error);
     });
+    axios.get(`${backendUrl}componente-estado/pir2`)
+    .then(response => {
+      statePir2 = response.data.state;
+    })
+    .catch(error => {
+      console.error('Error al obtener el estado:', error);
+    });
+    console.log(statePir1, statePir2)
+
+    if (statePir1 === true || statePir2 === true) {
+      stateSensor.textContent = 'Persona sospechosa detectada';
+    } else if (statePir1 === false && statePir2 === false) {
+      stateSensor.textContent = 'Apagado';
+    } else {
+      stateSensor.textContent = 'Estado desconocido';
+    }
 }
 
 // Llama a la función cada 1 segundo
