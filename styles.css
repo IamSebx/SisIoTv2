@@ -267,7 +267,6 @@ input:checked + .slider:before {
     padding: 5px 10px;
     margin-bottom: 5px;
     background-color: #e8f5e9;
-    border-left: 4px solid #4caf50;
     border-radius: 3px;
     font-size: 0.9em;
 }
@@ -275,3 +274,44 @@ input:checked + .slider:before {
 .event-log li:nth-child(odd) {
     background-color: #f1f8e9; /* Color alternativo para líneas */
 }
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #30be47;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #458650;
+}
+
+.btn:active {
+    background-color: #458650;
+}
+
+.clase-creada {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.clase-creada .descripcion {
+    font-weight: bold;
+    color: #333;
+}
+
+.clase-creada .fecha {
+    font-style: italic;
+    color: #666;
+}
+

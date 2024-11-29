@@ -155,7 +155,10 @@ function listEvents(){
     if (JSON.stringify(data) !== JSON.stringify(lastEvents)) {
       ul.innerHTML = ''; // Vacía la lista actual
       data.forEach(event => {
-        ul.innerHTML += `<li>${event.descripcion} ${event.fecha}</li>`;
+        ul.innerHTML += `<li class="clase-creada">
+                            <span class="descripcion">${event.descripcion}</span>
+                            <span class="fecha">${event.fecha}</span>
+                        </li>`;
       });
       lastEvents = data; // Actualiza la lista de eventos almacenada
     }
@@ -166,3 +169,16 @@ function listEvents(){
 }
 
 setInterval(listEvents, 1000)
+
+
+
+// Función para abrir el enlace dinámico en una nueva pestaña
+function viewCamera() {
+  // Cambia este enlace dinámicamente según sea necesario
+  const cameraLink = "https://www.google.com"; // Cambia este URL por el que necesites
+  window.open(cameraLink, "_blank"); // Abre el enlace en una nueva pestaña
+}
+
+// Asociar el evento de clic al botón
+document.getElementById("view-camera-btn").addEventListener("click", viewCamera);
+
